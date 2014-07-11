@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 1
+  task: MyString
+  complete: false
+  response: false
+  url: MyString
+  comments: MyString
+
+two:
+  employee_id: 1
+  task: MyString
+  complete: false
+  response: false
+  url: MyString
+  comments: MyString

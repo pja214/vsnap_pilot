@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @employee.company_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @employee.name %>
+</p>
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Complete?</th>
+      <th>Response?</th>
+      <th>URL</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employee.interactions.each do |interaction| %>
+      <tr>
+        <td><%= interaction.task %></td>
+        <td><%= interaction.complete %></td>
+        <td><%= interaction.response %></td>
+        <td><%= interaction.url %></td>
+        <td><%= interaction.comments %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
