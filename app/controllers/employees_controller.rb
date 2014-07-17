@@ -10,11 +10,15 @@ class EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.json
   def show
+    @employee = Employee.find_by(id: params[:id])
+    @company = Company.find_by(id: @employee.company_id)
+    @interactions = @employee.interactions
   end
 
   # GET /employees/new
   def new
-    @employee = Employee.new
+    @company = Company.find_by(id: params[:company_id])
+    @employee = @company.employees.new(name: params[:name])
   end
 
   # GET /employees/1/edit
@@ -24,7 +28,8 @@ class EmployeesController < ApplicationController
   # POST /employees
   # POST /employees.json
   def create
-    @employee = Employee.new(employee_params)
+    @company = Company.find_by(id: params[:company_id])
+    @employee = Employee.new(company_id: @company.id, name: params[:employee][:name])
 
     respond_to do |format|
       if @employee.save
@@ -67,8 +72,4 @@ class EmployeesController < ApplicationController
       @employee = Employee.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def employee_params
-      params.require(:employee).permit(:company_id, :name)
-    end
 end

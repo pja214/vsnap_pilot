@@ -2,7 +2,7 @@
 
 <p>
   <strong>Company:</strong>
-  <%= @employee.company_id %>
+  <%= @company.name %>
 </p>
 
 <p>
@@ -10,30 +10,34 @@
   <%= @employee.name %>
 </p>
 
-<%= link_to 'Edit', edit_employee_path(@employee) %> |
-<%= link_to 'Back', employees_path %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Task</th>
-      <th>Complete?</th>
-      <th>Response?</th>
-      <th>URL</th>
-      <th>Comments</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @employee.interactions.each do |interaction| %>
+<%= link_to 'Edit Employee', edit_employee_path(@employee) %> |
+<%= link_to "View All Employees at #{@company.name}", company_path(@company) %>
+<% if @interactions.count > 0 %>
+  <table>
+    <thead>
       <tr>
-        <td><%= interaction.task %></td>
-        <td><%= interaction.complete %></td>
-        <td><%= interaction.response %></td>
-        <td><%= interaction.url %></td>
-        <td><%= interaction.comments %></td>
-
+        <th>Task</th>
+        <th>Complete?</th>
+        <th>Response?</th>
+        <th>URL</th>
+        <th>Comments</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @employee.interactions.each do |interaction| %>
+        <tr>
+          <td><%= interaction.task %></td>
+          <td><%= interaction.complete %></td>
+          <td><%= interaction.response %></td>
+          <td><%= interaction.url %></td>
+          <td><%= interaction.comments %></td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<p>
+  <%= link_to "Add Interaction", new_employee_interaction_path(params[:id]) %>
+</p>

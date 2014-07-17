@@ -5,8 +5,9 @@
   <%= @company.name %>
 </p>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%= link_to 'New Employee', new_company_employee_path(@company) %> |
+<%= link_to 'Edit Company Info', edit_company_path(@company) %> |
+<%= link_to 'View All Companies', companies_path %>
 
 <table>
   <thead>

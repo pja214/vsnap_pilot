@@ -24,11 +24,15 @@ class InteractionsController < ApplicationController
   # POST /interactions
   # POST /interactions.json
   def create
-    @interaction = Interaction.new(interaction_params)
+    @employee = Employee.find_by(id: params[:employee_id])
+    @interaction = Interaction.new(employee_id: params[:employee_id], task: \
+      params[:interaction][:task], complete: params[:interaction][:complete], \
+      response: params[:interaction][:response], url: params[:interaction][:url], \
+      comments: params[:interaction][:comments])
 
     respond_to do |format|
       if @interaction.save
-        format.html { redirect_to @interaction, notice: 'Interaction was successfully created.' }
+        format.html { redirect_to @employee, notice: 'Interaction was successfully created.' }
         format.json { render action: 'show', status: :created, location: @interaction }
       else
         format.html { render action: 'new' }
@@ -65,10 +69,5 @@ class InteractionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_interaction
       @interaction = Interaction.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def interaction_params
-      params.require(:interaction).permit(:employee_id, :task, :complete, :response, :url, :comments)
     end
 end
