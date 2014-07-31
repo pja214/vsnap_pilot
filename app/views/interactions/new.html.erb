@@ -1,5 +1,6 @@
-<h1>New interaction</h1>
+<h1>New Interaction</h1>
 
+<% @url = employee_interactions_path(params[:employee_id]) %>
 <%= render 'form' %>
 
 <%= link_to 'Back', employee_path(params[:employee_id]) %>

@@ -14,17 +14,57 @@ h2 {
 }
 
 .entry .content {
-	float: right;
+	margin-left: 5%;
 	width: 85.425%;          /* 844px / 988px = 0.85425 */
+}
+
+.body {
+  max-width: 40em;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #movie {
 	margin-left: auto;
 	margin-right: auto;
-	width: 50%;
+	width: 300px;
 }
 
-
+.button {
+	width: 50px;
+	margin-left: auto;
+	margin-right: auto;
+   border-top: 1px solid #007ACC;
+   background: #007ACC;
+   background: -webkit-gradient(linear, left top, left bottom, from(#007ACC), to(#007ACC));
+   background: -webkit-linear-gradient(top, #007ACC, #007ACC);
+   background: -moz-linear-gradient(top, #007ACC, #007ACC);
+   background: -ms-linear-gradient(top, #007ACC, #007ACC);
+   background: -o-linear-gradient(top, #007ACC, #007ACC);
+   padding: 15px 30px;
+   -webkit-border-radius: 40px;
+   -moz-border-radius: 40px;
+   border-radius: 40px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   text-align: center;
+   color: white;
+   font-size: 1.3em;
+   font-family: Helvetica, Arial, sans-serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.button:active {
+   border-top-color: #4ab7ff;
+   background: #4ab7ff;
+   }
 
 .wizard a {
     padding: 12px 12px 10px 12px;

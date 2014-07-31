@@ -1,4 +1,7 @@
+<body class="page">
 <p id="notice"><%= notice %></p>
+
+<img class="logo" alt="image" src="http://media.tumblr.com/2f6f615c91790ad075b3d6e06d3d7d80/tumblr_inline_n8chy7vppp1qhgktc.png" />
 
 <p>
   <strong>Company:</strong>
@@ -12,15 +15,20 @@
 
 <%= link_to 'Edit Employee', edit_employee_path(@employee) %> |
 <%= link_to "View All Employees at #{@company.name}", company_path(@company) %>
+<h1>Week 1: First Five Vsnaps</h1>
+<div class="Entryblock-1">
 <% if @interactions.count > 0 %>
   <table>
     <thead>
       <tr>
-        <th>Task</th>
-        <th>Complete?</th>
-        <th>Response?</th>
-        <th>URL</th>
-        <th>Comments</th>
+        <th class="test">Vsnap Type</th>
+        <th>Was it sent?</th>
+        <th>Was it viewed?</th>
+        <th>Vsnap URL</th>
+        <th>How did it go?</th>
+        <th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -32,6 +40,8 @@
           <td><%= interaction.response %></td>
           <td><%= interaction.url %></td>
           <td><%= interaction.comments %></td>
+          <td><%= link_to "Edit", edit_interaction_path(interaction.id) %></td>
+          <td><%= link_to "Delete", interaction, :method => "delete" %></td>
 
         </tr>
       <% end %>
@@ -39,5 +49,42 @@
   </table>
 <% end %>
 <p>
-  <%= link_to "Add Interaction", new_employee_interaction_path(params[:id]) %>
+  <%= link_to "Add Vsnap", new_employee_interaction_path(params[:id]) %>
 </p>
+</div>
+
+<h1>Week 2 Vsnaps</h1>
+<table>
+    <thead>
+      <tr>
+        <th class="test">Vsnap Type</th>
+        <th>Was it sent?</th>
+        <th>Was it viewed?</th>
+        <th>Vsnap URL</th>
+        <th>How did it go?</th>
+        <th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+</table>
+
+<div class="gray">
+<h1>Week 3 Vsnaps</h1>
+<table>
+    <thead>
+      <tr>
+        <th class="test">Vsnap Type</th>
+        <th>Was it sent?</th>
+        <th>Was it viewed?</th>
+        <th>Vsnap URL</th>
+        <th>How did it go?</th>
+        <th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+  </table>
+  </div>
+<h1>Final Results</h1>
+</body>

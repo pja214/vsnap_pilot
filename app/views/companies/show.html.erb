@@ -1,26 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Company Name:</strong>
   <%= @company.name %>
 </p>
+<p>
+  Pilot Metric: <%= @company.pilot_metric %>
+</p>
 
-<%= link_to 'New Employee', new_company_employee_path(@company) %> |
+<%= link_to 'Add New Employee', new_company_employee_path(@company) %> |
 <%= link_to 'Edit Company Info', edit_company_path(@company) %> |
 <%= link_to 'View All Companies', companies_path %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Employees</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @company.employees.each do |employee| %>
-      <tr>
-        <td><%= link_to(employee.name, employee_path(employee.id)) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="spacer">
+</div>
+<div class="companytable">
+    <table>
+      <thead>
+        <tr>
+          <th>Employees</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @company.employees.each do |employee| %>
+          <tr>
+            <td><%= link_to(employee.name, employee_path(employee.id)) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

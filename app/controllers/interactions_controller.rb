@@ -19,6 +19,7 @@ class InteractionsController < ApplicationController
 
   # GET /interactions/1/edit
   def edit
+    @employee = Employee.find_by(id: Interaction.find_by(id: params[:id]).employee_id)
   end
 
   # POST /interactions
@@ -44,9 +45,16 @@ class InteractionsController < ApplicationController
   # PATCH/PUT /interactions/1
   # PATCH/PUT /interactions/1.json
   def update
+    @employee = Employee.find_by(id: @interaction.employee_id)
     respond_to do |format|
-      if @interaction.update(interaction_params)
-        format.html { redirect_to @interaction, notice: 'Interaction was successfully updated.' }
+
+      if @interaction.update(task: params[:interaction][:task], \
+        complete: params[:interaction][:complete], \
+        response: params[:interaction][:response], \
+        url: params[:interaction][:url], \
+        comments: params[:interaction][:comments])
+
+        format.html { redirect_to @employee, notice: 'Interaction was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -58,9 +66,10 @@ class InteractionsController < ApplicationController
   # DELETE /interactions/1
   # DELETE /interactions/1.json
   def destroy
+    employee_id = Interaction.find_by(id: params[:id]).employee_id
     @interaction.destroy
     respond_to do |format|
-      format.html { redirect_to interactions_url }
+      format.html { redirect_to employee_path(employee_id) }
       format.json { head :no_content }
     end
   end

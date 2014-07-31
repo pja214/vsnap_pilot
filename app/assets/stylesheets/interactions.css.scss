@@ -1,3 +1,43 @@
 // Place all the styles related to the Interactions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.field1, .field2, .field3, .field4, .field5 {
+	
+display: inline-block;
+  width: 150px;
+  height: 100px;
+  margin: .85em;
+  text-align: center;
+  border: 1px solid #F5F5F5;
+
+	}
+
+
+
+	.field1:hover, .field2:hover, .field3:hover, .field4:hover, .field5:hover {
+	
+display: inline-block;
+  width: 150px;
+  height: 100px;
+  margin: .85em;
+  text-align: center;
+  border: 1px solid black;
+ 
+	}
+
+
+label {
+	
+	font-size:1.4em;
+
+	}
+
+.fieldcontainer {
+	
+background-color: #F5F5F5;
+max-width: 90%;
+margin-left: auto;
+margin-right: auto;
+}
+

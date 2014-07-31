@@ -5,7 +5,6 @@ gem 'rails', '4.0.5'
 
 gem 'sqlite3'
 gem 'faker'
-gem 'therubyracer'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'

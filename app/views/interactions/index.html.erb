@@ -1,13 +1,13 @@
-<h1>Listing interactions</h1>
+<h1>List Interactions</h1>
 
 <table>
   <thead>
     <tr>
       <th>Employee</th>
       <th>Task</th>
-      <th>Complete</th>
-      <th>Response</th>
-      <th>Url</th>
+      <th>Complete?</th>
+      <th>Response?</th>
+      <th>URL</th>
       <th>Comments</th>
       <th></th>
       <th></th>
@@ -26,7 +26,7 @@
         <td><%= interaction.comments %></td>
         <td><%= link_to 'Show', interaction %></td>
         <td><%= link_to 'Edit', edit_interaction_path(interaction) %></td>
-        <td><%= link_to 'Destroy', interaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', interaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

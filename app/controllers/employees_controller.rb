@@ -23,6 +23,8 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
+    @employee = Employee.find_by(id: params[:id])
+    @company = Company.find_by(id: @employee.company_id)
   end
 
   # POST /employees
@@ -33,6 +35,11 @@ class EmployeesController < ApplicationController
 
     respond_to do |format|
       if @employee.save
+        Interaction.create(employee_id: @employee.id, week: 1, task: "Happy Birthday")
+        Interaction.create(employee_id: @employee.id, week: 1, task: "Thank a Colleague")
+        Interaction.create(employee_id: @employee.id, week: 1, task: "LinkedIn Update")
+        Interaction.create(employee_id: @employee.id, week: 1, task: "Thank a Customer")
+        Interaction.create(employee_id: @employee.id, week: 1, task: "Check in with a Customer")
         format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
         format.json { render action: 'show', status: :created, location: @employee }
       else
@@ -46,7 +53,7 @@ class EmployeesController < ApplicationController
   # PATCH/PUT /employees/1.json
   def update
     respond_to do |format|
-      if @employee.update(employee_params)
+      if @employee.update(name: params[:employee][:name])
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
         format.json { head :no_content }
       else
