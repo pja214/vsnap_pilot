@@ -1,3 +1,5 @@
+<img class="logo" alt="image" src="http://media.tumblr.com/2f6f615c91790ad075b3d6e06d3d7d80/tumblr_inline_n8chy7vppp1qhgktc.png" />
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -8,11 +10,12 @@
   Pilot Metric: <%= @company.pilot_metric %>
 </p>
 
-<%= link_to 'Add New Employee', new_company_employee_path(@company) %> |
-<%= link_to 'Edit Company Info', edit_company_path(@company) %> |
+<%= link_to 'Add New Employee', new_company_employee_path(@company) %> 
+<br />
+<%= link_to 'Edit Company Info', edit_company_path(@company) %> 
+<br />
 <%= link_to 'View All Companies', companies_path %>
-<div class="spacer">
-</div>
+<div class="spacer"></div>
 <div class="companytable">
     <table>
       <thead>

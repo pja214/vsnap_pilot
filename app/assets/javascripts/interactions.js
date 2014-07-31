@@ -29,15 +29,13 @@ $( "#interaction_task" ).ready(function() {
 
 
 $( "#interaction_url" ).ready(function() {
+	//checks to see the field contains text
+		var myElement = document.querySelector(".field2");
+	if ($('#interaction_url').val()) {
 
-		if ($('#interaction_url').val()) {
-			//	alert('True!');
-			var myElement = document.querySelector(".field2");
-
-			//alert('this updated when you tabbed away');
-			myElement.style.backgroundColor = "#8DD7D6";
-		};
-
+		//assigns a blue background if the field is filled, or makes it red if empty
+		myElement.style.backgroundColor = "#8DD7D6";
+	} else {myElement.style.backgroundColor = "#D78D8E";};
 });
 
 $( "#interaction_complete" ).ready(function() { 			//this will pull item data 0 from the array
@@ -57,11 +55,13 @@ $( "#interaction_response" ).ready(function() { 			//this will pull item data 0 
 
 
 $( "#interaction_comments" ).ready(function() {
-	if ($('#interaction_comments').val()) {
+	//checks to see the field contains text
 		var myElement = document.querySelector(".field5");
+	if ($('#interaction_comments').val()) {
 
+		//assigns a blue background if the field is filled, or makes it red if empty
 		myElement.style.backgroundColor = "#8DD7D6";
-	};
+	} else {myElement.style.backgroundColor = "#D78D8E";};
 });
 
 

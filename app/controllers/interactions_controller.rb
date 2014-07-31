@@ -1,82 +1,64 @@
 class InteractionsController < ApplicationController
   before_action :set_interaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_week
+  before_action :set_employee
 
-  # GET /interactions
-  # GET /interactions.json
-  def index
-    @interactions = Interaction.all
-  end
 
-  # GET /interactions/1
-  # GET /interactions/1.json
-  def show
-  end
-
-  # GET /interactions/new
   def new
-    @interaction = Interaction.new
+    @interaction = Interaction.new(employee_id: @employee.id)
   end
 
-  # GET /interactions/1/edit
   def edit
-    @employee = Employee.find_by(id: Interaction.find_by(id: params[:id]).employee_id)
   end
 
-  # POST /interactions
-  # POST /interactions.json
   def create
-    @employee = Employee.find_by(id: params[:employee_id])
-    @interaction = Interaction.new(employee_id: params[:employee_id], task: \
-      params[:interaction][:task], complete: params[:interaction][:complete], \
-      response: params[:interaction][:response], url: params[:interaction][:url], \
+    @interaction = Interaction.new(week_id: @week.id, \
+      task: params[:interaction][:task], \
+      complete: params[:interaction][:complete], \
+      response: params[:interaction][:response], \
+      url: params[:interaction][:url], \
       comments: params[:interaction][:comments])
 
-    respond_to do |format|
-      if @interaction.save
-        format.html { redirect_to @employee, notice: 'Interaction was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @interaction }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @interaction.errors, status: :unprocessable_entity }
-      end
+    if @interaction.save
+      redirect_to @employee, notice: 'Interaction was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
-  # PATCH/PUT /interactions/1
-  # PATCH/PUT /interactions/1.json
   def update
-    @employee = Employee.find_by(id: @interaction.employee_id)
-    respond_to do |format|
+    if @interaction.update(task: params[:interaction][:task], \
+      complete: params[:interaction][:complete], \
+      response: params[:interaction][:response], \
+      url: params[:interaction][:url], \
+      comments: params[:interaction][:comments])
 
-      if @interaction.update(task: params[:interaction][:task], \
-        complete: params[:interaction][:complete], \
-        response: params[:interaction][:response], \
-        url: params[:interaction][:url], \
-        comments: params[:interaction][:comments])
-
-        format.html { redirect_to @employee, notice: 'Interaction was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @interaction.errors, status: :unprocessable_entity }
-      end
+      redirect_to @employee, notice: 'Interaction was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
-  # DELETE /interactions/1
-  # DELETE /interactions/1.json
   def destroy
-    employee_id = Interaction.find_by(id: params[:id]).employee_id
     @interaction.destroy
-    respond_to do |format|
-      format.html { redirect_to employee_path(employee_id) }
-      format.json { head :no_content }
-    end
+    redirect_to employee_path(@employee)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_interaction
       @interaction = Interaction.find(params[:id])
+    end
+
+    def set_week
+      if params[:week_id] == nil
+        @week = Week.find(@interaction.week_id)
+      else
+        @week = Week.find(params[:week_id])
+      end
+    end
+
+    def set_employee
+      @employee = Employee.find(@week.employee_id)
     end
 end

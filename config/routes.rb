@@ -1,12 +1,15 @@
 Vsnap::Application.routes.draw do
   root 'companies#index'
   resources :companies do
-    resources :employees, only: [:index, :new, :create]
+    resources :employees, only: [:new, :create]
   end
   resources :employees, only: [:show, :edit, :update, :destroy] do
-    resources :interactions, only: [:index, :new, :create]
+    resources :weeks, only: [:new, :create]
   end
-  resources :interactions, only: [:show, :edit, :update, :destroy]
+  resources :weeks, only: [:update, :destroy] do
+    resources :interactions, only: [:new, :create]
+  end
+  resources :interactions, only: [:edit, :update, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

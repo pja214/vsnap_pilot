@@ -1,82 +1,63 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_company
 
-  # GET /employees
-  # GET /employees.json
-  def index
-    @employees = Employee.all
-  end
 
-  # GET /employees/1
-  # GET /employees/1.json
   def show
-    @employee = Employee.find_by(id: params[:id])
-    @company = Company.find_by(id: @employee.company_id)
-    @interactions = @employee.interactions
+    @weeks = @employee.weeks.all
+    @interactions = Hash.new
+    @weeks.each do |week|
+      @interactions[week] = week.interactions
+    end
   end
 
-  # GET /employees/new
   def new
-    @company = Company.find_by(id: params[:company_id])
-    @employee = @company.employees.new(name: params[:name])
+    @employee = @company.employees.new
   end
 
-  # GET /employees/1/edit
   def edit
-    @employee = Employee.find_by(id: params[:id])
-    @company = Company.find_by(id: @employee.company_id)
   end
 
-  # POST /employees
-  # POST /employees.json
   def create
-    @company = Company.find_by(id: params[:company_id])
     @employee = Employee.new(company_id: @company.id, name: params[:employee][:name])
-
-    respond_to do |format|
-      if @employee.save
-        Interaction.create(employee_id: @employee.id, week: 1, task: "Happy Birthday")
-        Interaction.create(employee_id: @employee.id, week: 1, task: "Thank a Colleague")
-        Interaction.create(employee_id: @employee.id, week: 1, task: "LinkedIn Update")
-        Interaction.create(employee_id: @employee.id, week: 1, task: "Thank a Customer")
-        Interaction.create(employee_id: @employee.id, week: 1, task: "Check in with a Customer")
-        format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @employee }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
+    if @employee.save
+      # Week.create(number: 1, employee_id: @employee.id)
+      # Interaction.create(week_id: 1, task: "Happy Birthday")
+      # Interaction.create(week_id: 1, task: "Thank a Colleague")
+      # Interaction.create(week_id: 1, task: "LinkedIn Update")
+      # Interaction.create(week_id: 1, task: "Thank a Customer")
+      # Interaction.create(week_id: 1, task: "Check in with a Customer")
+      redirect_to @employee, notice: 'Employee was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
-  # PATCH/PUT /employees/1
-  # PATCH/PUT /employees/1.json
   def update
-    respond_to do |format|
-      if @employee.update(name: params[:employee][:name])
-        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
+    if @employee.update(name: params[:employee][:name])
+      redirect_to @employee, notice: 'Employee was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
-  # DELETE /employees/1
-  # DELETE /employees/1.json
   def destroy
     @employee.destroy
-    respond_to do |format|
-      format.html { redirect_to employees_url }
-      format.json { head :no_content }
-    end
+    redirect_to employees_url
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
       @employee = Employee.find(params[:id])
     end
 
+    def set_company
+      if params[:company_id] == nil
+        @company = Company.find(@employee.company_id)
+      else
+        @company = Company.find(params[:company_id])
+      end
+    end
 end

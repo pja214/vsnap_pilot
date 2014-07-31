@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 (1..5).each do
-  Company.create(name: Faker::Commerce.product_name)
+  Company.create(name: Faker::Commerce.product_name, pilot_metric: Faker::Company.bs)
 end
 
 (1..5).each do |company_id|
@@ -17,8 +17,14 @@ end
 end
 
 (1..20).each do |employee_id|
+  (1..3).each do |number|
+    Week.create(employee_id: employee_id, number: number, comments: Faker::Lorem.paragraph)
+  end
+end
+
+(1..60).each do |week_id|
   (1..5).each do
-    Interaction.create(employee_id: employee_id, task: Faker::Lorem.sentence, \
-      complete: false, response: false, url: Faker::Internet.url('vsnap.com'))
+    Interaction.create(week_id: week_id, task: Faker::Company.bs, url: Faker::Internet.url, comments: Faker::Lorem.sentence, \
+      complete: random_bool = [true, false].sample, response: false)
   end
 end

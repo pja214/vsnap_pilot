@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731135304) do
+ActiveRecord::Schema.define(version: 20140731173440) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 20140731135304) do
   end
 
   create_table "interactions", force: true do |t|
-    t.integer  "employee_id"
     t.string   "task"
     t.boolean  "complete"
     t.boolean  "response"
@@ -37,11 +36,20 @@ ActiveRecord::Schema.define(version: 20140731135304) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "week"
+    t.integer  "week_id"
   end
 
   create_table "temps", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "weeks", force: true do |t|
+    t.integer  "number"
+    t.string   "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "employee_id"
   end
 
 end

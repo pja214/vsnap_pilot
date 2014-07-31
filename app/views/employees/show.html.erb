@@ -15,76 +15,31 @@
 
 <%= link_to 'Edit Employee', edit_employee_path(@employee) %> |
 <%= link_to "View All Employees at #{@company.name}", company_path(@company) %>
-<h1>Week 1: First Five Vsnaps</h1>
-<div class="Entryblock-1">
-<% if @interactions.count > 0 %>
-  <table>
-    <thead>
-      <tr>
-        <th class="test">Vsnap Type</th>
-        <th>Was it sent?</th>
-        <th>Was it viewed?</th>
-        <th>Vsnap URL</th>
-        <th>How did it go?</th>
-        <th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% @employee.interactions.each do |interaction| %>
-        <tr>
-          <td><%= interaction.task %></td>
-          <td><%= interaction.complete %></td>
-          <td><%= interaction.response %></td>
-          <td><%= interaction.url %></td>
-          <td><%= interaction.comments %></td>
-          <td><%= link_to "Edit", edit_interaction_path(interaction.id) %></td>
-          <td><%= link_to "Delete", interaction, :method => "delete" %></td>
+  <% @weeks.each do |week| %>
+    <h1> Week <%= week.number %></h1>
+    <table>
+      <thead>
+        <th>Task</th>
+        <th>Complete?</th>
+        <th>Response?</th>
+        <th>URL</th>
+        <th>Comments</th>
+      </thead>
+      <tbody>
+        <% @interactions[week].each do |interaction| %>
+          <tr>
+            <td> <%= interaction.task %> </td>
+            <td> <%= interaction.complete %> </td>
+            <td> <%= interaction.response %> </td>
+            <td> <%= interaction.url %> </td>
+            <td> <%= interaction.comments %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
-<p>
-  <%= link_to "Add Vsnap", new_employee_interaction_path(params[:id]) %>
-</p>
-</div>
 
-<h1>Week 2 Vsnaps</h1>
-<table>
-    <thead>
-      <tr>
-        <th class="test">Vsnap Type</th>
-        <th>Was it sent?</th>
-        <th>Was it viewed?</th>
-        <th>Vsnap URL</th>
-        <th>How did it go?</th>
-        <th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-</table>
-
-<div class="gray">
-<h1>Week 3 Vsnaps</h1>
-<table>
-    <thead>
-      <tr>
-        <th class="test">Vsnap Type</th>
-        <th>Was it sent?</th>
-        <th>Was it viewed?</th>
-        <th>Vsnap URL</th>
-        <th>How did it go?</th>
-        <th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-  </table>
-  </div>
 <h1>Final Results</h1>
 </body>
