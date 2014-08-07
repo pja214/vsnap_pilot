@@ -24,28 +24,17 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /companies/1
-  # PATCH/PUT /companies/1.json
   def update
-    respond_to do |format|
       if @company.update(company_params)
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
-        format.json { head :no_content }
+        redirect_to @company, notice: 'Company was successfully updated.'
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+        render action: 'edit'
       end
-    end
   end
 
-  # DELETE /companies/1
-  # DELETE /companies/1.json
   def destroy
     @company.destroy
-    respond_to do |format|
-      format.html { redirect_to companies_url }
-      format.json { head :no_content }
-    end
+    redirect_to companies_url
   end
 
   private

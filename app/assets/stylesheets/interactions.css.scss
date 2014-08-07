@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.field1, .field2, .field3, .field4, .field5 {
+.field1, .field2, .field3, .field4, .field5, .field6, {
 	
 display: inline-block;
   width: 150px;
@@ -13,9 +13,19 @@ display: inline-block;
 
 	}
 
+.field7 {
+	
+display: inline-block;
+  width: 80%;
+  height: 200px;
+  margin: .85em;
+  text-align: center;
+  border: 1px solid #F5F5F5;
+
+	}
 
 
-	.field1:hover, .field2:hover, .field3:hover, .field4:hover, .field5:hover {
+	.field1:hover, .field2:hover, .field3:hover, .field4:hover, .field5:hover, .field6:hover, {
 	
 display: inline-block;
   width: 150px;

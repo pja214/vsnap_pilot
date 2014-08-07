@@ -1,9 +1,11 @@
-<img class="logo" alt="image" src="http://media.tumblr.com/2f6f615c91790ad075b3d6e06d3d7d80/tumblr_inline_n8chy7vppp1qhgktc.png" />
+
+
+
 <h1>Vsnap Pilot Program: Participating Companies</h1>
 <div class="companytable">
     <table>
       <thead>
-        <tr>
+        <tr class="companylist">
           <th>Company Name</th>
           <th></th>
           <th></th>
@@ -14,7 +16,7 @@
       <tbody>
         <% @companies.each do |company| %>
           <tr>
-            <td><%= link_to company.name, company %></td>
+            <td><strong><%= link_to company.name, company %></strong></td>
             <td><%= link_to 'Edit Company', edit_company_path(company) %></td>
             <td><%= link_to 'Delete Company', company, method: :delete, data: { confirm: 'Are you sure you want to delete this company?' } %></td>
           </tr>
@@ -23,5 +25,6 @@
     </table>
 </div>
 <br>
-
+<div class="CTA_addcompBtn">
 <%= link_to 'Add New Company', new_company_path %>
+</div>

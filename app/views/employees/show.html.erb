@@ -1,45 +1,94 @@
 <body class="page">
 <p id="notice"><%= notice %></p>
 
-<img class="logo" alt="image" src="http://media.tumblr.com/2f6f615c91790ad075b3d6e06d3d7d80/tumblr_inline_n8chy7vppp1qhgktc.png" />
 
-<p>
+
+
+<p class="title">
   <strong>Company:</strong>
   <%= @company.name %>
 </p>
 
-<p>
+<p class="title">
+  <strong>Pilot Metric:</strong>
+  <%= @company.pilot_metric %>
+</p>
+
+<p class="title">
   <strong>Name:</strong>
   <%= @employee.name %>
 </p>
 
-<%= link_to 'Edit Employee', edit_employee_path(@employee) %> |
-<%= link_to "View All Employees at #{@company.name}", company_path(@company) %>
+<%= link_to 'Edit Participant', edit_employee_path(@employee) %> |
+<%= link_to "View All Participants at #{@company.name}", company_path(@company) %>
 
   <% @weeks.each do |week| %>
     <h1> Week <%= week.number %></h1>
-    <table>
+    <table class="entryBlock">
       <thead>
-        <th>Task</th>
-        <th>Complete?</th>
-        <th>Response?</th>
+        <th>Recipient</th>
+        <th>Viewed?</th>
+        <th>Response (Sentiment Button)?</th>
+        <th>Response (Call or Email)?</th>
+        <th>Pilot Metric Met?</th>
         <th>URL</th>
         <th>Comments</th>
+        <th></th>
+        <th></th>
       </thead>
       <tbody>
         <% @interactions[week].each do |interaction| %>
           <tr>
-            <td> <%= interaction.task %> </td>
-            <td> <%= interaction.complete %> </td>
-            <td> <%= interaction.response %> </td>
+            <td> <%= interaction.recipient %> </td>
+            <td> <%= interaction.viewed %> </td>
+            <td> <%= interaction.response_sentiment %> </td>
+            <td> <%= interaction.response_other %> </td>
+            <td> <%= interaction.pilot_metric %> </td>
             <td> <%= interaction.url %> </td>
             <td> <%= interaction.comments %> </td>
+            <td> <%= link_to 'Edit Vsnap', edit_interaction_path(interaction.id) %> </td>
+            <td> <%= button_to 'Delete Vsnap', interaction_path(interaction.id), :method => 'delete', data: { confirm: 'Are you sure you want to delete this Vsnap?' } %> </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-  <% end %>
 
+    <div class="CTA_addBtn">
+      <%= link_to "Add Vsnap to Week #{week.number}", new_week_interaction_path(week.id) %>
+    </div>
+
+    <div class="comments-all">
+      <div class="edit-comments">
+        <span>
+        <h3>How did it go this week?</h3>
+        <%= link_to "Edit Week #{week.number} Comments", edit_week_path(week.id) %>
+        </span>
+      </div>
+      <p>
+        <%= week.comments %>
+      </p>
+    </div> <!-- close .comments-all -->
+
+  <% end %>
+  <p>
+    <% if @weeks.count > 1 %>
+      <%= button_to "Delete Week #{@weeks.last.number}", week_path(@weeks.last.id), :method => 'delete', data: { confirm: 'Are you sure you want to delete this week?' } %>
+    <% end %>
+  </p>
+  <p>
+    <%= button_to "Add New Week", employee_weeks_path(@employee), :method => 'post' %>
+  </p>
 
 <h1>Final Results</h1>
+<div class="results">
+  <p class="title">
+    Total Vsnaps sent:<strong> <%= @interaction_count %>.</strong>
+  </p>
+  <p class="title">
+    Of those sent, <strong><%= @response_sentiment_count %></strong> had <%= if @response_sentiment_count == 1 then "a response" else "responses" end %> via the sentiment button, and <strong><%= @response_other_count %></strong> had <%= if @response_other_count == 1 then "a response" else "responses" end %> via email or phone call.
+  </p>
+  <p class="title">
+    <strong><%= @pilot_metric_count %></strong> of these Vsnaps met <%= @company.name %>'s pilot metric, <%= @company.pilot_metric.downcase %>.
+  </p>
+</div> <!-- end .results -->
 </body>

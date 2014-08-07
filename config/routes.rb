@@ -6,7 +6,7 @@ Vsnap::Application.routes.draw do
   resources :employees, only: [:show, :edit, :update, :destroy] do
     resources :weeks, only: [:new, :create]
   end
-  resources :weeks, only: [:update, :destroy] do
+  resources :weeks, only: [:update, :destroy, :edit] do
     resources :interactions, only: [:new, :create]
   end
   resources :interactions, only: [:edit, :update, :destroy]

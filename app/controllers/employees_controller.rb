@@ -6,9 +6,18 @@ class EmployeesController < ApplicationController
   def show
     @weeks = @employee.weeks.all
     @interactions = Hash.new
+    @interaction_count = 0
+    @response_sentiment_count = 0
+    @response_other_count = 0
+    @pilot_metric_count = 0
     @weeks.each do |week|
       @interactions[week] = week.interactions
+      @interaction_count = @interaction_count + week.interactions.where.not(recipient: nil).count
+      @response_sentiment_count = @response_sentiment_count + week.interactions.where(response_sentiment: true).count
+      @response_other_count = @response_other_count + week.interactions.where(response_other: true).count
+      @pilot_metric_count = @pilot_metric_count + week.interactions.where(pilot_metric: true).count
     end
+
   end
 
   def new
@@ -21,12 +30,12 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(company_id: @company.id, name: params[:employee][:name])
     if @employee.save
-      # Week.create(number: 1, employee_id: @employee.id)
-      # Interaction.create(week_id: 1, task: "Happy Birthday")
-      # Interaction.create(week_id: 1, task: "Thank a Colleague")
-      # Interaction.create(week_id: 1, task: "LinkedIn Update")
-      # Interaction.create(week_id: 1, task: "Thank a Customer")
-      # Interaction.create(week_id: 1, task: "Check in with a Customer")
+      week = Week.create(number: 1, employee_id: @employee.id)
+      Interaction.create(week_id: week.id, comments: "Vsnap 1: Happy Birthday")
+      Interaction.create(week_id: week.id, comments: "Vsnap 2: Thank a Colleague")
+      Interaction.create(week_id: week.id, comments: "Vsnap 3: LinkedIn Update")
+      Interaction.create(week_id: week.id, comments: "Vsnap 4: Thank a Customer")
+      Interaction.create(week_id: week.id, comments: "Vsnap 5: Check in with a Customer")
       redirect_to @employee, notice: 'Employee was successfully created.'
     else
       render action: 'new'
@@ -43,7 +52,7 @@ class EmployeesController < ApplicationController
 
   def destroy
     @employee.destroy
-    redirect_to employees_url
+    redirect_to company_url(@company)
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731173440) do
+ActiveRecord::Schema.define(version: 20140807011207) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -28,15 +28,17 @@ ActiveRecord::Schema.define(version: 20140731173440) do
   end
 
   create_table "interactions", force: true do |t|
-    t.string   "task"
-    t.boolean  "complete"
-    t.boolean  "response"
+    t.boolean  "viewed"
     t.string   "url"
     t.string   "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "week"
     t.integer  "week_id"
+    t.string   "recipient"
+    t.boolean  "response_sentiment"
+    t.boolean  "response_other"
+    t.boolean  "pilot_metric"
   end
 
   create_table "temps", force: true do |t|

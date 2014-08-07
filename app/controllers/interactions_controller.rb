@@ -5,7 +5,7 @@ class InteractionsController < ApplicationController
 
 
   def new
-    @interaction = Interaction.new(employee_id: @employee.id)
+    @interaction = Interaction.new(week_id: @week.id)
   end
 
   def edit
@@ -13,9 +13,11 @@ class InteractionsController < ApplicationController
 
   def create
     @interaction = Interaction.new(week_id: @week.id, \
-      task: params[:interaction][:task], \
-      complete: params[:interaction][:complete], \
-      response: params[:interaction][:response], \
+      pilot_metric: params[:interaction][:pilot_metric], \
+      recipient: params[:interaction][:recipient], \
+      viewed: params[:interaction][:viewed], \
+      response_sentiment: params[:interaction][:response_sentiment], \
+      response_other: params[:interaction][:response_other], \
       url: params[:interaction][:url], \
       comments: params[:interaction][:comments])
 
@@ -27,9 +29,11 @@ class InteractionsController < ApplicationController
   end
 
   def update
-    if @interaction.update(task: params[:interaction][:task], \
-      complete: params[:interaction][:complete], \
-      response: params[:interaction][:response], \
+    if @interaction.update(pilot_metric: params[:interaction][:pilot_metric], \
+      recipient: params[:interaction][:recipient], \
+      viewed: params[:interaction][:viewed], \
+      response_sentiment: params[:interaction][:response_sentiment], \
+      response_other: params[:interaction][:response_other], \
       url: params[:interaction][:url], \
       comments: params[:interaction][:comments])
 

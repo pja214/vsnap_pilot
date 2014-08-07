@@ -24,7 +24,9 @@ end
 
 (1..60).each do |week_id|
   (1..5).each do
-    Interaction.create(week_id: week_id, task: Faker::Company.bs, url: Faker::Internet.url, comments: Faker::Lorem.sentence, \
-      complete: random_bool = [true, false].sample, response: false)
+    Interaction.create(week_id: week_id, pilot_metric: random_bool = [true, false].sample, \
+      url: Faker::Internet.url, comments: Faker::Lorem.sentence, \
+      viewed: random_bool = [true, false].sample, response_sentiment: false, \
+      response_other: false, recipient: Faker::Name.name)
   end
 end
