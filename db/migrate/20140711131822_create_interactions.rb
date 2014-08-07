@@ -6,7 +6,7 @@ class CreateInteractions < ActiveRecord::Migration
       t.boolean :complete
       t.boolean :response
       t.string :url
-      t.string :comments
+      t.text :comments, :limit => nil
 
       t.timestamps
     end

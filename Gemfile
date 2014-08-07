@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.5'
+gem 'pg'
 
-gem 'sqlite3'
 gem 'faker'
 
 # Use SCSS for stylesheets

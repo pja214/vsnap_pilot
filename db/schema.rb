@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140807011207) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "companies", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140807011207) do
   create_table "interactions", force: true do |t|
     t.boolean  "viewed"
     t.string   "url"
-    t.string   "comments"
+    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "week"
@@ -48,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140807011207) do
 
   create_table "weeks", force: true do |t|
     t.integer  "number"
-    t.string   "comments"
+    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "employee_id"
