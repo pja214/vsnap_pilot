@@ -5,6 +5,7 @@ gem 'rails', '4.0.5'
 gem 'pg'
 
 gem 'faker'
+gem 'devise'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
